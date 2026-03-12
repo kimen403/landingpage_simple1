@@ -614,3 +614,26 @@ input:focus-visible {
     scroll-behavior: auto !important;
   }
 }
+
+/* ── Aksesibilitas high-contrast mode ────────── */
+@media (forced-colors: active) {
+  .metric-value,
+  .impact-number {
+    -webkit-text-fill-color: unset;
+    background: none;
+    color: CanvasText;
+  }
+
+  .hero-card--dark,
+  .cta {
+    background: Canvas;
+    border-color: ButtonText;
+  }
+
+  .btn-primary {
+    background: ButtonFace;
+    color: ButtonText;
+    border-color: ButtonText;
+    box-shadow: none;
+  }
+}
