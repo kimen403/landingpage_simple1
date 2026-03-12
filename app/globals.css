@@ -27,18 +27,17 @@ body {
 }
 
 body {
-  font-family: "Plus Jakarta Sans", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
   background: var(--bg);
   color: var(--text);
   line-height: 1.6;
 }
 
-/* ── Animasi ─────────────────────────────────── */
 @keyframes fadeInUp {
   from {
     opacity: 0;
     transform: translateY(28px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -65,7 +64,6 @@ body {
   margin-inline: auto;
 }
 
-/* ── Header ──────────────────────────────────── */
 .site-header {
   position: sticky;
   top: 0;
@@ -123,7 +121,6 @@ body {
   color: var(--accent);
 }
 
-/* ── Hero ────────────────────────────────────── */
 .hero {
   padding: 72px 0 56px;
   background:
@@ -179,7 +176,6 @@ h1 {
   margin: 24px 0 18px;
 }
 
-/* ── Buttons ─────────────────────────────────── */
 .btn {
   display: inline-flex;
   justify-content: center;
@@ -191,7 +187,12 @@ h1 {
   text-decoration: none;
   font-weight: 700;
   font-size: 0.95rem;
-  transition: background 200ms ease, border-color 200ms ease, color 200ms ease, transform 200ms ease, box-shadow 200ms ease;
+  transition:
+    background 200ms ease,
+    border-color 200ms ease,
+    color 200ms ease,
+    transform 200ms ease,
+    box-shadow 200ms ease;
 }
 
 .btn-primary {
@@ -245,7 +246,6 @@ h1 {
   padding: 4px 12px;
 }
 
-/* ── Hero Visual (SVG dekoratif) ─────────────── */
 .hero-visual {
   display: flex;
   align-items: center;
@@ -260,7 +260,6 @@ h1 {
   animation: fadeInUp 0.9s 0.2s ease both;
 }
 
-/* ── Hero Card (dark variant) ────────────────── */
 .hero-card {
   background: var(--surface);
   border: 1px solid var(--border);
@@ -273,7 +272,9 @@ h1 {
 .hero-card--dark {
   background: linear-gradient(145deg, #14532d 0%, #0f2617 55%, #0c1e2d 100%);
   border: 1px solid rgba(74, 222, 128, 0.2);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(74, 222, 128, 0.15);
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(74, 222, 128, 0.15);
   color: #fff;
 }
 
@@ -316,7 +317,6 @@ h1 {
   font-size: 0.85rem;
 }
 
-/* ── Sections ────────────────────────────────── */
 .section {
   padding: 64px 0;
 }
@@ -340,7 +340,6 @@ h1 {
   gap: 18px;
 }
 
-/* ── Cards ───────────────────────────────────── */
 .card {
   background: var(--surface);
   border: 1px solid var(--border);
@@ -353,7 +352,7 @@ h1 {
 }
 
 .card::before {
-  content: "";
+  content: '';
   position: absolute;
   inset-inline-start: 0;
   top: 0;
@@ -364,7 +363,7 @@ h1 {
 }
 
 .card::after {
-  content: "";
+  content: '';
   position: absolute;
   inset: 0;
   border-radius: var(--radius);
@@ -389,12 +388,10 @@ h1 {
   color: var(--text-muted);
 }
 
-/* ── Alt background ──────────────────────────── */
 .alt-bg {
   background: linear-gradient(170deg, #f0fdf4 0%, #eef7f2 100%);
 }
 
-/* ── Benefit articles ────────────────────────── */
 .benefit-grid article {
   padding: 20px;
   border-radius: var(--radius);
@@ -420,7 +417,6 @@ h1 {
   font-size: 0.95rem;
 }
 
-/* ── Quote ───────────────────────────────────── */
 .quote {
   margin: 0;
   color: var(--text);
@@ -436,7 +432,6 @@ h1 {
   font-weight: 700;
 }
 
-/* ── Impact / Dampak ─────────────────────────── */
 .impact-strip {
   margin-top: 28px;
   display: grid;
@@ -476,7 +471,6 @@ h1 {
   font-size: 0.9rem;
 }
 
-/* ── CTA Section ─────────────────────────────── */
 .cta {
   background: linear-gradient(160deg, #0f2617 0%, #14532d 45%, #0c1e2d 100%);
   position: relative;
@@ -484,7 +478,7 @@ h1 {
 }
 
 .cta::before {
-  content: "";
+  content: '';
   position: absolute;
   inset: 0;
   background:
@@ -497,7 +491,9 @@ h1 {
   background: rgba(255, 255, 255, 0.07);
   border: 1px solid rgba(74, 222, 128, 0.2);
   border-radius: 20px;
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  box-shadow:
+    0 24px 60px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
   padding: 40px 32px;
   position: relative;
   z-index: 1;
@@ -552,7 +548,6 @@ h1 {
   font-size: 0.86rem;
 }
 
-/* ── Footer ──────────────────────────────────── */
 .site-footer {
   background: linear-gradient(180deg, #0f1f15 0%, #0a1a10 100%);
   border-top: 1px solid rgba(74, 222, 128, 0.12);
@@ -564,7 +559,6 @@ h1 {
   font-size: 0.95rem;
 }
 
-/* ── Focus styles ────────────────────────────── */
 a:focus-visible,
 button:focus-visible,
 input:focus-visible {
@@ -572,7 +566,6 @@ input:focus-visible {
   outline-offset: 2px;
 }
 
-/* ── Responsive ──────────────────────────────── */
 @media (min-width: 760px) {
   .nav-list {
     display: flex;
@@ -615,25 +608,24 @@ input:focus-visible {
   }
 }
 
-/* ── Aksesibilitas high-contrast mode ────────── */
 @media (forced-colors: active) {
   .metric-value,
   .impact-number {
     -webkit-text-fill-color: unset;
     background: none;
-    color: CanvasText;
+    color: canvastext;
   }
 
   .hero-card--dark,
   .cta {
-    background: Canvas;
-    border-color: ButtonText;
+    background: canvas;
+    border-color: buttontext;
   }
 
   .btn-primary {
-    background: ButtonFace;
-    color: ButtonText;
-    border-color: ButtonText;
+    background: buttonface;
+    color: buttontext;
+    border-color: buttontext;
     box-shadow: none;
   }
 }
