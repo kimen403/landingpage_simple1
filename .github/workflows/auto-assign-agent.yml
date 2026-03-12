@@ -1,0 +1,89 @@
+name: Auto Assign Agent
+
+on:
+  issues:
+    types:
+      - opened
+      - labeled
+
+permissions:
+  issues: write
+
+jobs:
+  assign-agent:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Assign issue based on labels
+        uses: actions/github-script@v7
+        env:
+          FRONTEND_ASSIGNEE: ${{ vars.FRONTEND_ASSIGNEE }}
+          BACKEND_ASSIGNEE: ${{ vars.BACKEND_ASSIGNEE }}
+          DB_ASSIGNEE: ${{ vars.DB_ASSIGNEE }}
+          QA_ASSIGNEE: ${{ vars.QA_ASSIGNEE }}
+        with:
+          script: |
+            const issue = context.payload.issue;
+            const labels = issue.labels.map((label) => label.name.toLowerCase());
+
+            const rules = [
+              {
+                label: 'frontend',
+                agentName: 'frontend-dev',
+                assignee: process.env.FRONTEND_ASSIGNEE,
+                note: 'Tangani perubahan Next.js di folder /frontend.'
+              },
+              {
+                label: 'backend',
+                agentName: 'backend-dev',
+                assignee: process.env.BACKEND_ASSIGNEE,
+                note: 'Tangani perubahan Hapi.js di folder /backend.'
+              },
+              {
+                label: 'db',
+                agentName: 'database-dev',
+                assignee: process.env.DB_ASSIGNEE,
+                note: 'Tangani schema, migration, atau query Prisma di folder /prisma.'
+              },
+              {
+                label: 'qa',
+                agentName: 'qa-review',
+                assignee: process.env.QA_ASSIGNEE,
+                note: 'Lakukan review risiko, testing, dan validasi perubahan.'
+              }
+            ];
+
+            const matches = rules.filter((rule) => labels.includes(rule.label));
+
+            if (matches.length === 0) {
+              core.info('No matching agent label found on this issue.');
+              return;
+            }
+
+            const assignees = [...new Set(matches.map((rule) => rule.assignee).filter(Boolean))];
+
+            if (assignees.length > 0) {
+              await github.rest.issues.addAssignees({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                assignees
+              });
+            }
+
+            const lines = [
+              'Agent routing issue ini terdeteksi dari label:',
+              ...matches.map((rule) => `- \\`${rule.label}\\` -> \\`${rule.agentName}\\`: ${rule.note}`),
+              '',
+              assignees.length > 0
+                ? `GitHub assignee ditambahkan: ${assignees.map((name) => `@${name}`).join(', ')}`
+                : 'Belum ada GitHub assignee yang ditambahkan. Isi repository variables `FRONTEND_ASSIGNEE`, `BACKEND_ASSIGNEE`, `DB_ASSIGNEE`, atau `QA_ASSIGNEE` bila ingin auto-assign ke username tertentu.',
+              '',
+              'Catatan: custom agent Copilot dipilih saat menggunakan Copilot Chat atau automation lanjutan; workflow ini memetakan label issue ke mode agent yang direkomendasikan.'
+            ];
+
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issue.number,
+              body: lines.join('\n')
+            });
